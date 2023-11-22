@@ -1,0 +1,33 @@
+import pickle
+
+# Define una clase simple como ejemplo
+class EjemploObjeto:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Función para serializar el objeto y guardarlo en un archivo pickle
+def serializar_objeto(objeto, nombre_archivo):
+    with open(nombre_archivo, 'wb') as archivo:
+        pickle.dump(objeto, archivo)
+    print(f'Objeto serializado y guardado en {nombre_archivo}')
+
+# Función para deserializar el objeto desde un archivo pickle
+def deserializar_objeto(nombre_archivo):
+    with open(nombre_archivo, 'rb') as archivo:
+        objeto_recuperado = pickle.load(archivo)
+    return objeto_recuperado
+
+# Ejemplo de uso
+objeto_original = EjemploObjeto(nombre='Juan', edad=30)
+
+# Serializar el objeto y guardarlo en un archivo
+nombre_archivo_pickle = 'ejemplo.pickle'
+serializar_objeto(objeto_original, nombre_archivo_pickle)
+
+# Deserializar el objeto desde el archivo
+objeto_recuperado = deserializar_objeto(nombre_archivo_pickle)
+
+# Verificar que el objeto deserializado es igual al original
+print('Objeto original:', objeto_original.__dict__)
+print('Objeto recuperado:', objeto_recuperado.__dict__)
